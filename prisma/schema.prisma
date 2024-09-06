@@ -9,6 +9,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id              Int       @id @default(autoincrement())
+  name            String
+  email           String    @unique
+  username        String?   @unique
+  currentWeek     Int       @default(1)
+  completedWeeks  Int       @default(0)
+  preferences     String?   // Optional preferences, can store JSON or strings
+  profilePicture  String?   // Optional profile picture URL
+  joinedAt        DateTime  @default(now())
+}
+
+
 model Series {
   id          Int       @id @default(autoincrement())
   week        Int       @unique
