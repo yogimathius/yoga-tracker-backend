@@ -17,9 +17,10 @@ model User {
   currentWeek     Int       @default(1)
   currentWeekProgress Float @default(0)
   completedWeeks  Int       @default(0)
-  preferences     String?   // Optional preferences, can store JSON or strings
-  profilePicture  String?   // Optional profile picture URL
+  preferences     String?
+  profilePicture  String?
   joinedAt        DateTime  @default(now())
+  sessions        Session[]
 }
 
 
@@ -46,4 +47,6 @@ model Session {
   duration  Int
   progress  Float
   date      DateTime @default(now())
+
+  User User[]
 }
