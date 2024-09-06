@@ -1,25 +1,26 @@
+// src/routes/session.ts
 import { Router } from "express";
-import { addSession } from "../utils/dataManager";
-import { Session } from "../utils/types";
+import prisma from "../utils/prisma";
 
 const router = Router();
 
-router.post("/", (req, res) => {
-  const { week, duration, progress }: Session = req.body;
+router.post("/", async (req, res) => {
+  const { week, duration, progress } = req.body;
 
-  const newSession: Session = {
-    id: Math.floor(Math.random() * 1000),
-    week,
-    duration,
-    progress,
-    date: new Date(),
-  };
+  try {
+    const session = await prisma.session.create({
+      data: {
+        week,
+        duration,
+        progress,
+        date: new Date(),
+      },
+    });
 
-  addSession(newSession);
-
-  return res
-    .status(201)
-    .json({ message: "Session added", session: newSession });
+    return res.status(201).json({ message: "Session added", session });
+  } catch (error) {
+    return res.status(500).send({ error: "Failed to add session" });
+  }
 });
 
 export default router;
