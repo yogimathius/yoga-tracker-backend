@@ -15,6 +15,7 @@ model User {
   email           String    @unique
   username        String?   @unique
   currentWeek     Int       @default(1)
+  currentWeekProgress Float @default(0)
   completedWeeks  Int       @default(0)
   preferences     String?   // Optional preferences, can store JSON or strings
   profilePicture  String?   // Optional profile picture URL

@@ -1,11 +1,15 @@
 import express from "express";
+import cors from "cors"; // Import the cors package
 import seriesRouter from "./routes/series";
 import sessionRouter from "./routes/session";
 import progressRouter from "./routes/progress";
-import usersRouter from "./routes/users"; // Import the new users route
+import usersRouter from "./routes/users";
 
 const app = express();
 const port = 3000;
+
+// Enable CORS for all origins
+app.use(cors()); // Add this line
 
 app.use(express.json());
 

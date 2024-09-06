@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "currentWeekProgress" DOUBLE PRECISION NOT NULL DEFAULT 0;
