@@ -4,6 +4,22 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.user.create({
+    data: {
+      name: "Mathius Johnson",
+      email: "info@yogimathius.dev",
+      username: "yogimathius",
+      currentWeek: 1,
+      completedWeeks: 0,
+      preferences: JSON.stringify({
+        preferredPracticeTime: "afternoon",
+        difficulty: "intermediate",
+      }),
+    },
+  });
+
+  console.log("User (Mathius Johnson) seeded to the database.");
+
   // Week 1 and 2 - Foundation and Strength Building
   await prisma.series.create({
     data: {
