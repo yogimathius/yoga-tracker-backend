@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    if (progress === 7) {
+    if (user.currentWeekProgress === 6) {
       const result = await prisma.user.update({
         where: { id: 1 },
         data: {
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
           },
         },
       });
-      return res.json("Session added successfully");
+      return res.json(result);
     } else {
       const result = await prisma.user.update({
         where: { id: 1 },
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
         },
       });
 
-      return res.json("Session added successfully");
+      return res.json(result);
     }
   } catch (error) {
     return res.status(500).send({ error: "Failed to add session" });
